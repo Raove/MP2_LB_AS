@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 import subprocess
 import socket
 
@@ -13,11 +13,11 @@ def handle_requests():
     if request.method == "POST":
         # Handle POST request to stress the CPU
         stress_cpu()
-        return jsonify({"message": "CPU stress initiated"})
+        return str("CPU stress initiated")
     elif request.method == "GET":
         # Handle GET request to return private IP address
         ip_address = socket.gethostbyname(socket.gethostname())
-        return jsonify({"private_ip": ip_address})
+        return str("private_ip" + str(ip_address))
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
